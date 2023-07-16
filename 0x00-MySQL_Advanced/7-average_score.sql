@@ -24,6 +24,6 @@ BEGIN
 		0,
 		total_score / project_count
 	)
-	WHERE user_id = user_id;
+	WHERE id = user_id;
 END$$
 DELIMITER ;
