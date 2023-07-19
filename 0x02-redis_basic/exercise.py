@@ -26,10 +26,7 @@ class Cache:
             ) -> Union[str, int, bytes, float]:
         """ Retrieves values from the Redis data storage """
         self._redis.get(key)
-        if fn is not None:
-            return fn(data)
-        else:
-            return data
+        return fn(data) if fn is not None else data
 
     def get_str(self, key: str) -> str:
         """ Takes data and converts to string """
