@@ -25,13 +25,14 @@ class Cache:
             fn: Callable = None
             ) -> Union[str, int, bytes, float]:
         """ Retrieves values from the Redis data storage """
-        self._redis.get(key)
-        return fn(data) if fn is not None else data
+        data = self._redis.get(key)
+        if data in not None:
+            return fn(data) if fn is not None else data
 
     def get_str(self, key: str) -> str:
         """ Takes data and converts to string """
-        return self.get(key, lambda x: x.decode('utf-8'))
+        return self.get(key, fn=lambda x: x.decode('utf-8'))
 
     def get_int(self, key: str) -> int:
         """ Takes data and converts to integer """
-        return self.get(key, lambda x: int(x))
+        return self.get(key, fn=lambda x: int(x))
